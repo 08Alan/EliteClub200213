@@ -19,6 +19,9 @@
     - Continuous Deployment
 
 > Demo 6 : App Service Best Practices
+- 共同放置区域 Colocation 
+- 应用服务自动修复功能
+- Auto Scale
 
 # Container Service
 
@@ -26,13 +29,16 @@
 # Demo AKS_Engine
 
 ## Create Service Principal
-az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/6500a4b3-d5f9-4ef4-a764-5d6360780b0b/resourceGroups/AKS_Engine_Demo"
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/6500a4b3-d5f9-4ef4-a764-5d6360780b0b/resourceGroups/AKS_Engine_Demo1"
+
+## Edit Kubenetes.json 
+- servicePrincipalProfile param 
 
 ##Generate ARM Template
 ./aks-engine generate --api-model Kubernetes.json
 
 ## Deployment Azure Resource by ARM Template
-az group deployment create --name=aksengine --resource-group=AKS_Engine_Demo --template-file=azuredeploy.json --parameters=azuredeploy.parameters.json
+az group deployment create --name=aksengine --resource-group=AKS_Engine_Demo1  --template-file=azuredeploy.json --parameters=azuredeploy.parameters.json
 
 <!--
 kubectl run nginx --image nginx
@@ -57,17 +63,21 @@ kubectl get services
 `az acr create --resource-group ACSDemo --name ACSDemoACR --sku Basic`
 ## ACR login
 `az acr login --name ACSDemoACR`
-`docker login -u ACSDemoACR -p lwk/OjRd1w2pY4D3SlLvgxxxxxxxxxx acsdemoacr.azurecr.io`
-`az acr list --resource-group ACSDemo --query "[].{acrLoginServer:loginServer}" --output table`
+## Docker login
+`docker login -u ACSDemoACR -p +DrllUBGxvbPqgHCc0cb+dKH9VUlUnBt acsdemoacr1.azurecr.io`
+## Docker tag
 `docker tag azure-vote-front acsdemoacr.azurecr.io/azure-vote-front:v1`
+## Docker push
 `docker push acsdemoacr.azurecr.io/azure-vote-front:v1`
+## Show ACR images
 `az acr repository list --name ACSDemoACR --output table`
-
+## Create Azure Kubernetes Service
 `az aks create --resource-group ACSDemo --name AKSCluster --node-count 1 --generate-ssh-keys`
+## Get ASK Credentials
 `az aks get-credentials --resource-group ACSDemo --name AKSCluster`
 `kubectl get nodes`
-
-`CLIENT_ID=$(az aks show --resource-group ACSDemo --name AKSCluster --query "servicePrincipalProfile.clientId" --output tsv)`
+## ACR and AKS role assignment
+`CLIENT_ID=$(az aks show --resource-group ACSDemo --name AKSCluster1 --query "servicePrincipalProfile.clientId" --output tsv)`
 `ACR_ID=$(az acr show --name ACSDemoACR --resource-group ACSDemo --query "id" --output tsv)`
 `az role assignment create --assignee $CLIENT_ID --role Reader --scope $ACR_ID`
 ## 修改azure-vote-all-in-one-redis.yaml
@@ -77,3 +87,23 @@ kubectl get services
 `kubectl get service`
 
 > Demo 3  : AKS Best Practices
+[设计多租户群集,群集隔离](https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-cluster-isolation)
+
+容器网络接口 CNI
+![容器网络接口-CNI](README/2020-02-13-15-36-07.png)
+分配入口流量
+![分配入口流量](README/2020-02-13-15-36-35.png)
+应用程序防火墙 (WAF) 保护流量
+![应用程序防火墙 (WAF) 保护流量](README/2020-02-13-15-36-51.png)
+存储和备份
+[Storage + DR](https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-storage)
+[业务连续性和灾难恢复](https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-multi-region)
+
+
+# 反饋
+
+> Feedback
+![問卷](README/2020-02-13-15-39-24.png)
+
+> Question
+![](README/2020-02-13-15-40-06.png)
