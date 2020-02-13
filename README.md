@@ -11,7 +11,7 @@
 > Demo 3 : Kudo
 
 > Demo 4 : API Management
-![apim with apigateway](CheatSheet/2020-02-13-03-21-07.png)
+![apim with apigateway](README/2020-02-13-15-43-05.png)
 
 > Demo 5 : Azure DevOps with App Service
     - Version Control System(VCS)
