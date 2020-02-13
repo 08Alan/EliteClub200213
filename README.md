@@ -29,3 +29,8 @@ git push -u origin master
 > Demo 2 : Azure DevOps with ACS
 
 > Demo 3  : AKS Best Practices
+
+## 
+![Feedback](README/2020-02-13-14-54-06.png)
+
+![Question](README/2020-02-13-14-54-44.png)
