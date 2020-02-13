@@ -90,13 +90,21 @@ kubectl get services
 [设计多租户群集,群集隔离](https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-cluster-isolation)
 
 容器网络接口 CNI
+
 ![容器网络接口-CNI](README/2020-02-13-15-36-07.png)
+
 分配入口流量
+
 ![分配入口流量](README/2020-02-13-15-36-35.png)
+
 应用程序防火墙 (WAF) 保护流量
+
 ![应用程序防火墙 (WAF) 保护流量](README/2020-02-13-15-36-51.png)
+
 存储和备份
+
 [Storage + DR](https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-storage)
+
 [业务连续性和灾难恢复](https://docs.microsoft.com/zh-cn/azure/aks/operator-best-practices-multi-region)
 
 
