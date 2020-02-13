@@ -1,7 +1,7 @@
 # App Service
 
 > Demo 0 : App Service Plan & Scale
-
+git push -u origin master
 > Demo 1 : Upload app file
 > Demo 2 : Auto Swap
 > Demo 2 : Visual Studio deploy app
